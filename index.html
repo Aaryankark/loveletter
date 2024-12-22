@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Only for You 💖</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            color: #fff;
+            font-size: 3rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        .instruction {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        .heart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            max-width: 90%;
+        }
+        /* Heart Styling */
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            background-color: #ff6b6b;
+            clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 80%, 15% 100%, 0% 35%);
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+        .heart:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+        /* Love Text Display */
+        #quote-box {
+            position: fixed;
+            bottom: 10%;
+            width: 80%;
+            max-width: 600px;
+            background: #fff;
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        /* Floating Heart Animation */
+        .floating-heart {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6b6b;
+            clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 80%, 15% 100%, 0% 35%);
+            animation: floatUp 5s linear infinite;
+        }
+        @keyframes floatUp {
+            0% {
+                bottom: -10%;
+                left: calc(100% * var(--x));
+                opacity: 0.8;
+            }
+            100% {
+                bottom: 110%;
+                left: calc(100% * var(--x) - 50px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Just for You 💕</h1>
+    <p class="instruction">Click on the hearts to reveal my feelings for you!</p>
+    <div class="heart-container" aria-label="Clickable hearts">
+        <!-- Hearts to Click -->
+        <div class="heart" onclick="showQuote()">💗</div>
+        <div class="heart" onclick="showQuote()">💗</div>
+        <div class="heart" onclick="showQuote()">💗</div>
+        <div class="heart" onclick="showQuote()">💗</div>
+        <div class="heart" onclick="showQuote()">💗</div>
+    </div>
+    <div id="quote-box" aria-live="polite">You’re my one in a million!</div>
+
+    <script>
+        // Array of love quotes
+        const quotes = [
+            "You’re my first thought in the morning and my last at night.",
+            "I didn’t believe in magic until I met you.",
+            "If I had to choose between breathing and loving you, I’d use my last breath to say 'I love you.'",
+            "You make my world brighter and my heart fuller.",
+            "You’re my favorite chapter in this story called life.",
+            "Every heartbeat of mine whispers your name.",
+            "When I’m with you, time stands still, and the world disappears.",
+            "You’re the reason for my every smile, laugh, and happy tear.",
+        ];
+
+        // Display a random quote
+        function showQuote() {
+            const quoteBox = document.getElementById('quote-box');
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            quoteBox.textContent = randomQuote;
+            quoteBox.style.display = "block";
+            setTimeout(() => {
+                quoteBox.style.display = "none";
+            }, 4000); // Hide after 4 seconds
+        }
+
+        // Generate floating hearts
+        const body = document.body;
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.style.setProperty('--x', Math.random());
+            body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000); // Remove after animation
+        }
+
+        setInterval(createFloatingHeart, 300); // Add a new floating heart every 300ms
+    </script>
+</body>
+</html>
